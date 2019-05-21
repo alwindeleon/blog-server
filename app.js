@@ -54,10 +54,10 @@ app.use(
     })
 );
 app.use(cors());
-app.use(morgan('dev'));
-app.use(morgan('short', {
-    stream: accessLogStream
-}));
+// app.use(morgan('dev'));
+// app.use(morgan('short', {
+//     stream: accessLogStream
+// }));
 
 // Connect to database
 var db = config.db.connect();

@@ -1,0 +1,15 @@
+language: node_js
+cache: npm
+services:
+  - mongodb
+before_script:
+  - npm install && npm install -g mocha
+script:
+  - npm run test
+deploy:
+  provider: heroku
+  api_key:
+    secure: 995d3932-45d1-44e3-a50c-43bce0047567
+  app: blog-deleon
+  on:
+    repo: alwindeleon/blog-server

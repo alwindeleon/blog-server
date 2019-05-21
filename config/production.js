@@ -13,7 +13,7 @@ config.db.options.reconnectInterval = 500; // Reconnect every 500ms
 
 //  ======[ ADDRESS ]======
 config.serverIp = '0.0.0.0';
-config.serverPort = 3000;
+config.serverPort = process.env.PORT || 3000;
 config.redisPort = 6379;
 
 //  ======[ ADMIN ]======

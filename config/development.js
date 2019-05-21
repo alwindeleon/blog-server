@@ -12,7 +12,7 @@ config.db.options.poolSize = 10;
 
 //  ======[ ADDRESS ]======
 config.serverIp = '0.0.0.0';
-config.serverPort = 3000;
+config.serverPort =  process.env.PORT || 3000;
 config.redisPort = 6379;
 
 //  ======[ ADMIN ]======

@@ -41,11 +41,11 @@ var server = null;
 
 app.locals.siteName = 'Blog';
 
-var accessLogStream = fs.createWriteStream(
-    __dirname + '/logs/' + app.locals.siteName + '_access ' + (new Date()).toDateString() + '.log', {
-        flags: 'a'
-    }
-);
+// var accessLogStream = fs.createWriteStream(
+//     __dirname + '/logs/' + app.locals.siteName + '_access ' + (new Date()).toDateString() + '.log', {
+//         flags: 'a'
+//     }
+// );
 
 app.use(
     helmet({

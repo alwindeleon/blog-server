@@ -83,7 +83,7 @@ config.db.connect = () => {
     let dbStr = config.db.credential;
     var port = (dbStr.port.length > 0) ? ':' + dbStr.port : '';
     var login = (dbStr.user.length > 0) ? dbStr.user + ':' + dbStr.pw + '@' : '';
-    var uristring = 'mongodb://' + login + dbStr.host + port + '/' + dbStr.database;
+    var uristring = process.env.MONGODB_URI || 'mongodb://' + login + dbStr.host + port + '/' + dbStr.database;
 
     mongoose.connect(uristring, config.db.options, function (err) {
         if (err) {

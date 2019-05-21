@@ -131,8 +131,9 @@ app.use(function (req, res) {
 });
 
 // Start server
+var port = process.env.PORT|| config.address.serverPort
 server = app.listen(
-    config.address.serverPort,
+    port,
     () => {
         debug(
             'Express server listening at localhost:%d in %s mode',

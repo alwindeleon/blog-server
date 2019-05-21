@@ -31,7 +31,7 @@ config.db = {
 config.address = {
     version: '0.0.1',
     domain: 'http://blog.com',
-    serverPort: 3000,
+    serverPort: process.env.PORT || 3000,
     redisPort: 6379
 };
 

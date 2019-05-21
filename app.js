@@ -41,11 +41,11 @@ var server = null;
 
 app.locals.siteName = 'Blog';
 
-var accessLogStream = fs.createWriteStream(
-    __dirname + '/logs/' + app.locals.siteName + '_access ' + (new Date()).toDateString() + '.log', {
-        flags: 'a'
-    }
-);
+// var accessLogStream = fs.createWriteStream(
+//     __dirname + '/logs/' + app.locals.siteName + '_access ' + (new Date()).toDateString() + '.log', {
+//         flags: 'a'
+//     }
+// );
 
 app.use(
     helmet({
@@ -54,10 +54,10 @@ app.use(
     })
 );
 app.use(cors());
-app.use(morgan('dev'));
-app.use(morgan('short', {
-    stream: accessLogStream
-}));
+// app.use(morgan('dev'));
+// app.use(morgan('short', {
+//     stream: accessLogStream
+// }));
 
 // Connect to database
 var db = config.db.connect();

@@ -6,6 +6,7 @@ services:
   - mongodb
 before_script:
   - npm install && npm install -g mocha
+  - sleep 15
 script:
   - npm run test
 deploy:

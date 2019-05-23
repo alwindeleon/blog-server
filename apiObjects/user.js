@@ -10,11 +10,14 @@ const debug = require('debug')('App:ApiObject:user');
 
 const csvReader = require('csvtojson');
 
+const jwt = require('jsonwebtoken');
+
 const ModelOptions = {
     mutable: Model.GetFieldsByOption('mutable'),
     search: Model.GetFieldsByOption('search'),
 };
 
+const secret = "supersecretkeywow";
 
 /*
 ========= [ CORE METHODS ] =========
@@ -52,7 +55,7 @@ api.get = (id) => {
         if (!data) {
             return Promise.reject(404);
         }
-
+       
         return data;
     });
 };
@@ -122,6 +125,34 @@ api.editBulk = (condition, file) => {
 //BULK DELETE
 api.deleteBulk = () => {
     return Model.remove({}).then(() => `All items got Deleted`);
+};
+
+
+/*
+========= [ AUTHENTICATION METHODS ] =========
+*/
+api.authenticate = (username, password) => {
+    return Model.findOne({
+        'username': username,
+        'password': password
+    }) 
+    .then(data => {
+        data = data.toObject()
+        if (!data) {
+            return Promise.reject(404);
+        }
+        const payload = {
+            name: username,
+            admin: true
+        };
+        let token = jwt.sign(payload, secret, {
+          expiresIn: "24h"
+        });
+        
+        return {
+            token: token
+        }
+    });
 };
 
 

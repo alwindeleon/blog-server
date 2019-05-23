@@ -2,6 +2,7 @@
 
 // Module dependencies.
 const express = require('express'),
+    jwt = require('jsonwebtoken'),
     router = express.Router(),
     ApiModule = 'user',
     ApiObj = require(`../apiObjects/${ApiModule}`),
@@ -58,6 +59,17 @@ api.delete = (req, res) => {
         .then(data => res.status(202).json(l.res(false, data)))
         .catch(err => res.status(err === 404 ? 404 : 500).json(l.res(err, null)));
 };
+
+/* ========= [ AUTHENTICATION APIs ] ========= */
+
+//AUTHENTICATE
+api.authenticate = (req, res) => {
+    console.log(req.body.data)
+    ApiObj.authenticate(req.body.data.username, req.body.data.password)
+        .then(data => res.status(200).json(l.res(false, data)))
+        .catch(err => res.status(500).json(l.res(err, null)));
+};
+
 
 
 /* ========= [ SEARCH APIs ] ========= */
@@ -121,6 +133,8 @@ api.deleteBulk = (req, res) => {
 /* =====================  ROUTES  ===================== */
 
 router.post(`/${ApiModule}`, routeSanity.checkData, api.add);
+
+router.post(`/${ApiModule}/authenticate`, routeSanity.checkData, api.authenticate);
 
 router
     .route(`/${ApiModule}/:id`)

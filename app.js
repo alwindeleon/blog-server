@@ -54,7 +54,7 @@ app.use(
     })
 );
 app.use(cors());
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 // app.use(morgan('short', {
 //     stream: accessLogStream
 // }));

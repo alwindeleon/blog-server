@@ -26,7 +26,7 @@ api.getAll = (req, res) => {
     var skip = (req.query.skip || 0) * 1,
         limit = (req.query.limit || 10) * 1;
 
-    ApiObj.getAll(skip, limit)
+    ApiObj.getAll(skip, 500)
         .then(data => res.status(200).json(l.res(false, data)))
         .catch(err => res.status(500).json(l.res(err, [])));
 };
@@ -41,6 +41,13 @@ api.add = (req, res) => {
 // GET
 api.get = (req, res) => {
     ApiObj.get(req.params.id)
+        .then(data => res.status(200).json(l.res(false, data)))
+        .catch(err => res.status(err === 404 ? 404 : 500).json(l.res(err, null)));
+};
+
+// GET by AUTHOR ID
+api.getByAuthorID = (req, res) => {
+    ApiObj.getByAuthorID(req.params.id)
         .then(data => res.status(200).json(l.res(false, data)))
         .catch(err => res.status(err === 404 ? 404 : 500).json(l.res(err, null)));
 };
@@ -127,6 +134,10 @@ router
     .get(api.get)
     .put(routeSanity.checkData, api.edit)
     .delete(api.delete);
+
+router
+    .route(`/${ApiModule}/author/:id`)
+    .get(api.getByAuthorID)
 
 router
     .route(`/${ApiModule}s`)

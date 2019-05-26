@@ -141,17 +141,20 @@ api.authenticate = (username, password) => {
         if (!data) {
             return Promise.reject(404);
         }
-        const payload = {
-            name: username,
-            admin: true
-        };
-        let token = jwt.sign(payload, secret, {
+        let t_payload = {
+            username: username
+        }
+
+        let token = jwt.sign(t_payload, secret, {
           expiresIn: "24h"
         });
-        
-        return {
+
+        const payload = {
+            username: username,
+            user_id: data._id,
             token: token
-        }
+        };
+        return payload;
     });
 };
 

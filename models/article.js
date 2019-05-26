@@ -40,6 +40,12 @@ let fields = {
 		type: String, 
 		mutable: true, 
 		search: true
+	},
+    
+    author_name: { 
+		type: String, 
+		mutable: true, 
+		search: true
 	}
     
 };

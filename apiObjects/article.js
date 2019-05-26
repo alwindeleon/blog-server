@@ -57,6 +57,20 @@ api.get = (id) => {
     });
 };
 
+// GET by AUTHOR_ID
+api.getByAuthorID = (id) => {
+    return Model.find({
+        'author_id': id
+    }) 
+    .then(data => {
+        if (!data) {
+            return Promise.reject(404);
+        }
+
+        return data;
+    });
+};
+
 // POST
 api.add = (data) => {
     data = new Model(data);
